@@ -1,9 +1,10 @@
 package com.study.querydslstudy.repository;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import com.study.querydslstudy.entity.Academy;
 import java.util.List;
 import org.junit.After;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +43,8 @@ class AcademyRepositorySupportTest {
     List<Academy> result = academyRepositorySupport.findByName(name);
 
     //then
-    Assertions.assertEquals(result.size(), 1);
-    Assertions.assertEquals(result.get(0).getAddress(), address);
+    assertEquals(result.size(), 1);
+    assertEquals(result.get(0).getAddress(), address);
   }
 
   @Test
@@ -57,8 +58,8 @@ class AcademyRepositorySupportTest {
     List<Academy> result = academyRepository.findByName(name);
 
     //then
-    Assertions.assertEquals(result.size(), 1);
-    Assertions.assertEquals(result.get(0).getAddress(), address);
+    assertEquals(result.size(), 1);
+    assertEquals(result.get(0).getAddress(), address);
   }
 
   @Test
@@ -72,7 +73,7 @@ class AcademyRepositorySupportTest {
     List<Academy> result = academyQueryRepository.findByName(name);
 
     //then
-    Assertions.assertEquals(result.size(), 1);
-    Assertions.assertEquals(result.get(0).getAddress(), address);
+    assertEquals(result.size(), 1);
+    assertEquals(result.get(0).getAddress(), address);
   }
 }
