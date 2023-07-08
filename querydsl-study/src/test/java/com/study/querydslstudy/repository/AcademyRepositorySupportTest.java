@@ -43,4 +43,19 @@ class AcademyRepositorySupportTest {
     Assertions.assertEquals(result.size(), 1);
     Assertions.assertEquals(result.get(0).getAddress(), address);
   }
+
+  @Test
+  public void querydsl_Custom설정_기능_확인() {
+    //given
+    String name = "younggyo";
+    String address = "younggyo@gmail.com";
+    academyRepository.save(new Academy(name, address));
+
+    //when
+    List<Academy> result = academyRepository.findByName(name);
+
+    //then
+    Assertions.assertEquals(result.size(), 1);
+    Assertions.assertEquals(result.get(0).getAddress(), address);
+  }
 }
