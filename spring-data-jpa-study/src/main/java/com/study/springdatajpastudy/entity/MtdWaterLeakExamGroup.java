@@ -8,11 +8,14 @@ import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,10 +24,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "mtd_water_leak_exam_group")
 @NoArgsConstructor
-@AllArgsConstructor
 public class MtdWaterLeakExamGroup implements Serializable {
 
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "exam_group_idx")
   private Long examGroupIdx;
 
@@ -77,4 +80,33 @@ public class MtdWaterLeakExamGroup implements Serializable {
   private Integer targetCnt;
 
   private String city;
+
+  @Builder
+  public MtdWaterLeakExamGroup(Long examGroupIdx,
+      Set<MtdWaterLeakExamWateruser> waterLeakExamWaterusers, String area_id,
+      LocalDate created_date, String created_dept, String created_user,
+      LocalDate examEstimatedDate, LocalDate examFinishedDt, String examNm,
+      LocalDate examPlanStartDt, LocalDate examStartedDt, String examStatus, Long groupSid,
+      LocalDate lastModifiedDate, String lastModifiedDept, String lastModifiedUser,
+      Integer targetCnt, String city) {
+    this.examGroupIdx = examGroupIdx;
+    this.waterLeakExamWaterusers = waterLeakExamWaterusers;
+    this.area_id = area_id;
+    this.created_date = created_date;
+    this.created_dept = created_dept;
+    this.created_user = created_user;
+    this.examEstimatedDate = examEstimatedDate;
+    this.examFinishedDt = examFinishedDt;
+    this.examNm = examNm;
+    this.examPlanStartDt = examPlanStartDt;
+    this.examStartedDt = examStartedDt;
+    this.examStatus = examStatus;
+    this.groupSid = groupSid;
+    this.lastModifiedDate = lastModifiedDate;
+    this.lastModifiedDept = lastModifiedDept;
+    this.lastModifiedUser = lastModifiedUser;
+    this.targetCnt = targetCnt;
+    this.city = city;
+  }
 }
+

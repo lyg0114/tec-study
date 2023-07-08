@@ -6,12 +6,16 @@ import java.math.BigDecimal;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,22 +23,21 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "mtd_water_leak_exam_wateruser")
 @NoArgsConstructor
-@AllArgsConstructor
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class MtdWaterLeakExamWateruser implements Serializable {
 
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "exam_wateruser_idx")
   private Long examWateruserIdx;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "exam_group_idx")
   private MtdWaterLeakExamGroup examGroup;
 
   @OneToMany
   @JoinColumn(name = "exam_wateruser_idx")
   private Set<MtdMeterinfoLeak> mtdMeterinfoLeaks;
-
 
   @Column(name = "area_id")
   private String areaId;
@@ -56,4 +59,23 @@ public class MtdWaterLeakExamWateruser implements Serializable {
   private Long consumerSid;
 
   private String city;
+
+  @Builder
+  public MtdWaterLeakExamWateruser(Long examWateruserIdx,
+      MtdWaterLeakExamGroup examGroup,
+      Set<MtdMeterinfoLeak> mtdMeterinfoLeaks, String areaId, String dividarea,
+      String dongno, String examResult, Long groupSid, BigDecimal leakMinUsage,
+      Long consumerSid, String city) {
+    this.examWateruserIdx = examWateruserIdx;
+    this.examGroup = examGroup;
+    this.mtdMeterinfoLeaks = mtdMeterinfoLeaks;
+    this.areaId = areaId;
+    this.dividarea = dividarea;
+    this.dongno = dongno;
+    this.examResult = examResult;
+    this.groupSid = groupSid;
+    this.leakMinUsage = leakMinUsage;
+    this.consumerSid = consumerSid;
+    this.city = city;
+  }
 }
