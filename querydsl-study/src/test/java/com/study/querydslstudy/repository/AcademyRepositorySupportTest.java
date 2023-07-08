@@ -23,6 +23,8 @@ class AcademyRepositorySupportTest {
   private AcademyRepository academyRepository;
   @Autowired
   private AcademyRepositorySupport academyRepositorySupport;
+  @Autowired
+  private AcademyQueryRepository academyQueryRepository;
 
   @After
   public void tearDown() throws Exception {
@@ -53,6 +55,21 @@ class AcademyRepositorySupportTest {
 
     //when
     List<Academy> result = academyRepository.findByName(name);
+
+    //then
+    Assertions.assertEquals(result.size(), 1);
+    Assertions.assertEquals(result.get(0).getAddress(), address);
+  }
+
+  @Test
+  public void querydsl_기본_기능_확인2() {
+    //given
+    String name = "jojoldu";
+    String address = "jojoldu@gmail.com";
+    academyRepository.save(new Academy(name, address));
+
+    //when
+    List<Academy> result = academyQueryRepository.findByName(name);
 
     //then
     Assertions.assertEquals(result.size(), 1);
