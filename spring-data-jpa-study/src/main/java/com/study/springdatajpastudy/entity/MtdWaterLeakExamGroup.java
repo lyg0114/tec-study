@@ -2,9 +2,15 @@ package com.study.springdatajpastudy.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,56 +23,58 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MtdWaterLeakExamGroup implements Serializable {
-    @Id
-    @Column(name = "exam_group_idx")
-    private Long examGroupIdx;
 
-    @Column(name = "area_id")
-    private String area_id;
+  @Id
+  @Column(name = "exam_group_idx")
+  private Long examGroupIdx;
 
-    @Column(name = "created_date")
-    private LocalDate created_date;
+  @OneToMany(mappedBy = "examGroup")
+  private Set<MtdWaterLeakExamWateruser> waterLeakExamWaterusers = new HashSet<>();
 
-    @Column(name = "created_dept")
-    private String created_dept;
+  @Column(name = "area_id")
+  private String area_id;
 
-    @Column(name = "created_user")
-    private String created_user;
+  @Column(name = "created_date")
+  private LocalDate created_date;
 
-    @Column(name = "exam_estimated_date")
-    private LocalDate examEstimatedDate;
+  @Column(name = "created_dept")
+  private String created_dept;
 
-    @Column(name = "exam_finished_dt")
-    private LocalDate examFinishedDt;
+  @Column(name = "created_user")
+  private String created_user;
 
-    @Column(name = "exam_nm")
-    private String examNm;
+  @Column(name = "exam_estimated_date")
+  private LocalDate examEstimatedDate;
 
-    @Column(name = "exam_plan_start_dt")
-    private LocalDate examPlanStartDt;
+  @Column(name = "exam_finished_dt")
+  private LocalDate examFinishedDt;
 
-    @Column(name = "exam_started_dt")
-    private LocalDate examStartedDt;
+  @Column(name = "exam_nm")
+  private String examNm;
 
-    @Column(name = "exam_status")
-    private String examStatus;
+  @Column(name = "exam_plan_start_dt")
+  private LocalDate examPlanStartDt;
 
-    @Column(name = "group_sid")
-    private Long groupSid;
+  @Column(name = "exam_started_dt")
+  private LocalDate examStartedDt;
 
-    @Column(name = "last_modified_date")
-    private LocalDate lastModifiedDate;
+  @Column(name = "exam_status")
+  private String examStatus;
 
-    @Column(name = "last_modified_dept")
-    private String lastModifiedDept;
+  @Column(name = "group_sid")
+  private Long groupSid;
 
-    @Column(name = "last_modified_user")
-    private String lastModifiedUser;
+  @Column(name = "last_modified_date")
+  private LocalDate lastModifiedDate;
 
-    @Column(name = "target_cnt")
-    private Integer targetCnt;
+  @Column(name = "last_modified_dept")
+  private String lastModifiedDept;
 
-    private String city;
+  @Column(name = "last_modified_user")
+  private String lastModifiedUser;
 
+  @Column(name = "target_cnt")
+  private Integer targetCnt;
 
+  private String city;
 }

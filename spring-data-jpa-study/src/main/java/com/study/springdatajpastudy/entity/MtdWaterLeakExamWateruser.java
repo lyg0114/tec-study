@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -26,13 +27,14 @@ public class MtdWaterLeakExamWateruser implements Serializable {
   @Column(name = "exam_wateruser_idx")
   private Long examWateruserIdx;
 
+  @ManyToOne
+  @JoinColumn(name = "exam_group_idx")
+  private MtdWaterLeakExamGroup examGroup;
+
   @OneToMany
   @JoinColumn(name = "exam_wateruser_idx")
   private Set<MtdMeterinfoLeak> mtdMeterinfoLeaks;
 
-  @OneToMany
-  @JoinColumn(name = "exam_group_idx")
-  private Set<MtdWaterLeakExamGroup> mtdWaterLeakExamGroupEntities;
 
   @Column(name = "area_id")
   private String areaId;
@@ -52,9 +54,6 @@ public class MtdWaterLeakExamWateruser implements Serializable {
 
   @Column(name = "consumer_sid")
   private Long consumerSid;
-
-  @Column(name = "exam_group_idx")
-  private Long examGroupIdx;
 
   private String city;
 }
