@@ -9,7 +9,6 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author : iyeong-gyo
@@ -26,7 +25,6 @@ class MeterLeakServiceTest {
   @Autowired
   MeterLeakService meterLeakService;
 
-  @Transactional
   @Test
   public void test_addLeakInfo() {
     meterLeakService.addLeakInfo();

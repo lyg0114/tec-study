@@ -14,4 +14,8 @@ public class TeamInfoDto {
 
   private String teamName;
   List<MemberInfoDto> members = new ArrayList<>();
+
+  public void addNewMember(MemberInfoDto memberInfoDto) {
+    this.addNewMember(memberInfoDto);
+  }
 }

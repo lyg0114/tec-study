@@ -12,6 +12,11 @@ public class MemberInfoDto {
   private String memberName;
   private int age;
 
+  public MemberInfoDto(String memberName, int age) {
+    this.memberName = memberName;
+    this.age = age;
+  }
+
   public Member converToEntity() {
     return Member.builder()
         .name(this.memberName)
