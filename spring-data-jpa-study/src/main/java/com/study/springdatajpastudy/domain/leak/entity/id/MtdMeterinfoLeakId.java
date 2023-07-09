@@ -1,4 +1,4 @@
-package com.study.springdatajpastudy.entity.id;
+package com.study.springdatajpastudy.domain.leak.entity.id;
 
 import java.io.Serializable;
 import java.time.LocalDate;

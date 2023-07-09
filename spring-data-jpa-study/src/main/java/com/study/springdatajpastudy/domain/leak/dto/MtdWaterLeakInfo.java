@@ -1,4 +1,4 @@
-package com.study.springdatajpastudy.dto;
+package com.study.springdatajpastudy.domain.leak.dto;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -6,7 +6,7 @@ import lombok.Data;
 
 /**
  * @author : iyeong-gyo
- * @package : com.study.springdatajpastudy.dto
+ * @package : com.study.springdatajpastudy.domain.leak.dto
  * @since : 2023/07/08
  */
 @Data

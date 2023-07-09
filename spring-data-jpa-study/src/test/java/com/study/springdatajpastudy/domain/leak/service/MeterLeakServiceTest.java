@@ -1,9 +1,9 @@
-package com.study.springdatajpastudy.service;
+package com.study.springdatajpastudy.domain.leak.service;
 
-import com.study.springdatajpastudy.entity.MtdWaterLeakExamGroup;
-import com.study.springdatajpastudy.entity.MtdWaterLeakExamWateruser;
-import com.study.springdatajpastudy.repository.MtdWaterLeakExamGroupRepository;
-import com.study.springdatajpastudy.repository.MtdWaterLeakExamWateruserRepository;
+import com.study.springdatajpastudy.domain.leak.entity.MtdWaterLeakExamGroup;
+import com.study.springdatajpastudy.domain.leak.entity.MtdWaterLeakExamWateruser;
+import com.study.springdatajpastudy.domain.leak.repository.MtdWaterLeakExamGroupRepository;
+import com.study.springdatajpastudy.domain.leak.repository.MtdWaterLeakExamWateruserRepository;
 import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author : iyeong-gyo
- * @package : com.study.springdatajpastudy.service
+ * @package : com.study.springdatajpastudy.domain.leak.service
  * @since : 2023/07/08
  */
 @SpringBootTest

@@ -1,6 +1,6 @@
-package com.study.springdatajpastudy.entity;
+package com.study.springdatajpastudy.domain.leak.entity;
 
-import com.study.springdatajpastudy.entity.id.MtdWaterLeakListId;
+import com.study.springdatajpastudy.domain.leak.entity.id.MtdWaterLeakListId;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import javax.persistence.Column;
