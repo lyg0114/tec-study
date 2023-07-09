@@ -9,6 +9,7 @@ import com.study.springdatajpastudy.domain.teamplay.repository.TeamRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author : iyeong-gyo
@@ -22,6 +23,7 @@ public class TeamPlayService {
   private final MemberRepository memberRepository;
   private final TeamRepository teamRepository;
 
+  @Transactional
   public void addNewTeamV1(TeamInfoDto teamInfoDto) {
     Team team = new Team();
     team.setName(teamInfoDto.getTeamName());

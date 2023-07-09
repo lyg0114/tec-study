@@ -1,6 +1,8 @@
 package com.study.springdatajpastudy.domain.teamplay.repository;
 
 import com.study.springdatajpastudy.domain.teamplay.entity.Member;
+import com.study.springdatajpastudy.domain.teamplay.entity.Team;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -9,5 +11,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @since : 2023/07/09
  */
 public interface MemberRepository extends JpaRepository<Member, Long> {
-
+  List<Member> findMembersByTeam(Team team);
 }

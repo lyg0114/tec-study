@@ -16,6 +16,6 @@ public class TeamInfoDto {
   List<MemberInfoDto> members = new ArrayList<>();
 
   public void addNewMember(MemberInfoDto memberInfoDto) {
-    this.addNewMember(memberInfoDto);
+    this.members.add(memberInfoDto);
   }
 }
