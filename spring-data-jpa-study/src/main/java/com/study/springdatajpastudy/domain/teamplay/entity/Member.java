@@ -22,6 +22,7 @@ import lombok.NoArgsConstructor;
 public class Member {
 
   @Id
+  @Column(name = "MEMBER_ID")
   @GeneratedValue
   private Long id;
 
@@ -31,8 +32,8 @@ public class Member {
   @Column(name = "AGE")
   private int age;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "TEAM_ID")
+  @ManyToOne
+  @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
   private Team team;
 
   @Builder
