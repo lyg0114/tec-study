@@ -28,6 +28,29 @@ class TeamPlayServiceTest {
   @Autowired
   private TeamPlayService teamPlayService;
 
+
+  @Test
+  @Transactional
+  @Rollback(false)
+  public void add_new_team_test_3() {
+    TeamInfoDto nTeam = new TeamInfoDto();
+    nTeam.setTeamName("team-1");
+    nTeam.addNewMember(new MemberInfoDto("Kyle", 31));
+    nTeam.addNewMember(new MemberInfoDto("Lizzy", 29));
+    teamPlayService.addNewTeamV1(nTeam);
+
+    Member referenceById = memberRepository.getReferenceById(2L);
+    System.out.println("referenceById.getName() = " + referenceById.getName());
+    System.out.println("referenceById.getTeam().getName() = " + referenceById.getTeam().getName());
+    System.out.println("referenceById.getTeam().getId() = " + referenceById.getTeam().getId());
+
+    System.out.println("######################################################");
+    List<Member> members = referenceById.getTeam().getMembers();
+    for (Member member : members) {
+      System.out.println("member.getName() = " + member.getName());
+    }
+  }
+
   @Test
   @Transactional
   @Rollback(false)
