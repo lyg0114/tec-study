@@ -22,19 +22,19 @@ import lombok.NoArgsConstructor;
 public class Member {
 
   @Id
-  @Column(name = "MEMBER_ID")
   @GeneratedValue
+  @Column(name = "MEMBER_ID")
   private Long id;
 
   @Column(name = "USERNAME")
   private String name;
 
+  @ManyToOne
+  @JoinColumn(name = "TEAM_ID")
+  private Team team;
+
   @Column(name = "AGE")
   private int age;
-
-  @ManyToOne
-  @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
-  private Team team;
 
   @Builder
   public Member(Long id, String name, int age,
