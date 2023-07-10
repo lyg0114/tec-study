@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "mtd_water_leak_exam_wateruser")
 @NoArgsConstructor
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+//@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class MtdWaterLeakExamWateruser implements Serializable {
 
   @Id
@@ -30,7 +30,7 @@ public class MtdWaterLeakExamWateruser implements Serializable {
   @Column(name = "exam_wateruser_idx")
   private Long examWateruserIdx;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "exam_group_idx")
   private MtdWaterLeakExamGroup examGroup;
 

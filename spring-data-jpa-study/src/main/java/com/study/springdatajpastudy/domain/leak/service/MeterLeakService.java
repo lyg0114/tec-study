@@ -25,33 +25,30 @@ public class MeterLeakService {
 
   @Transactional
   public void addLeakInfo() {
+    MtdWaterLeakExamGroup group1 = MtdWaterLeakExamGroup.builder()
+        .examNm("TEST-exam1")
+        .city("Daegu")
+        .groupSid(99L)
+        .build();
+    MtdWaterLeakExamGroup savedGroup = groupRepository.save(group1);
 
     MtdWaterLeakExamWateruser use1 = MtdWaterLeakExamWateruser.builder()
         .consumerSid(1L)
         .areaId("00")
         .leakMinUsage(new BigDecimal("1.0"))
         .groupSid(99L)
+        .examGroup(savedGroup)
         .build();
     MtdWaterLeakExamWateruser use2 = MtdWaterLeakExamWateruser.builder()
         .consumerSid(2L)
         .areaId("00")
         .leakMinUsage(new BigDecimal("1.5"))
         .groupSid(99L)
+        .examGroup(savedGroup)
         .build();
 
     MtdWaterLeakExamWateruser userSave1 = examUserRepository.save(use1);
     MtdWaterLeakExamWateruser userSave2 = examUserRepository.save(use2);
-
-    MtdWaterLeakExamGroup group1 = MtdWaterLeakExamGroup.builder()
-        .examNm("TEST-exam1")
-        .city("Daegu")
-        .groupSid(99L)
-        .build();
-
-    MtdWaterLeakExamGroup groupSave1 = groupRepository.save(group1);
-
-    userSave1.setExamGroup(groupSave1);
-    userSave1.setExamGroup(groupSave1);
   }
 
 }
