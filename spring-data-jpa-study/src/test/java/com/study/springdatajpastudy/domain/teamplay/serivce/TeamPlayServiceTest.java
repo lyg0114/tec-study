@@ -8,6 +8,7 @@ import com.study.springdatajpastudy.domain.teamplay.repository.MemberRepository;
 import com.study.springdatajpastudy.domain.teamplay.repository.TeamRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,23 +33,30 @@ class TeamPlayServiceTest {
   @Autowired
   private EntityManager em;
 
-  @Test
-  @Transactional
-  @Rollback(false)
-  public void add_new_team_test_1() {
+  @BeforeEach
+  public void before(){
+    initData();
+    em.flush();
+    em.clear();
+  }
+
+  private void initData() {
     TeamInfoDto nTeam = new TeamInfoDto();
     nTeam.setTeamName("team-1");
     nTeam.addNewMember(new MemberInfoDto("Kyle", 31));
     nTeam.addNewMember(new MemberInfoDto("Lizzy", 29));
     teamPlayService.addNewTeamV1(nTeam);
+  }
 
-    em.flush();
-    em.clear();
-
+  @Test
+  @Transactional
+  @Rollback(false)
+  public void add_new_team_test_1() {
     List<Team> all = teamRepository.findAll();
     Team team = all.get(0);
     Assert.assertNotNull(team);
     List<Member> members = team.getMembers();
     Assert.assertNotEquals(members.size(), 0);
   }
+
 }
