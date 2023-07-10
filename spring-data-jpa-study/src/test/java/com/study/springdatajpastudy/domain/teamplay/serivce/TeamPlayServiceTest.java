@@ -39,15 +39,17 @@ class TeamPlayServiceTest {
     nTeam.addNewMember(new MemberInfoDto("Lizzy", 29));
     teamPlayService.addNewTeamV1(nTeam);
 
-    Member referenceById = memberRepository.getReferenceById(2L);
-    System.out.println("referenceById.getName() = " + referenceById.getName());
-    System.out.println("referenceById.getTeam().getName() = " + referenceById.getTeam().getName());
-    System.out.println("referenceById.getTeam().getId() = " + referenceById.getTeam().getId());
+    List<Team> all = teamRepository.findAll();
+    for (Team team : all) {
+      System.out.println("team.getId() = " + team.getId());
+      System.out.println("team.getName() = " + team.getName());
+    }
 
-    System.out.println("######################################################");
-    List<Member> members = referenceById.getTeam().getMembers();
-    for (Member member : members) {
+    List<Member> all1 = memberRepository.findAll();
+    for (Member member : all1) {
+      System.out.println("member.getId() = " + member.getId());
       System.out.println("member.getName() = " + member.getName());
+      System.out.println("member.getTeam().getId() = " + member.getTeam().getId());
     }
   }
 

@@ -28,6 +28,6 @@ public class Team {
   private String name;
 
   @OneToMany(mappedBy = "team")
-  List<Member> members = new ArrayList<Member>();
+  List<Member> members = new ArrayList<>();
 
 }
