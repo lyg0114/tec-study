@@ -1,0 +1,13 @@
+# H2 데이터베이스를 사용하는 경우
+spring:
+  h2:
+    console:
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+      hibernate:
+        format_sql: true
+    show-sql: true
