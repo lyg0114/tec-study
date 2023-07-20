@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>테이블 스크롤 예제</title>
+  <style>
+    .table-container {
+      width: 300px;
+      overflow-x: scroll;
+    }
+
+    table {
+      width: 600px;
+    }
+
+    td {
+      padding: 5px;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      var scrollAmount = 10; // 스크롤 속도 (픽셀 단위)
+
+      // 왼쪽 버튼에 마우스 오버 이벤트 추가
+      $("#scroll-left").mouseover(function() {
+        scrollTable(-scrollAmount);
+      });
+
+      // 오른쪽 버튼에 마우스 오버 이벤트 추가
+      $("#scroll-right").mouseover(function() {
+        scrollTable(scrollAmount);
+      });
+
+      // 마우스 이벤트 종료 시 스크롤 멈추기
+      $("#scroll-left, #scroll-right").mouseout(function() {
+        stopScroll();
+      });
+
+      var scrollInterval; // 스크롤 인터벌 변수
+
+      // 테이블 스크롤 함수
+      function scrollTable(amount) {
+        scrollInterval = setInterval(function() {
+          var currentScrollLeft = $(".table-container").scrollLeft();
+          $(".table-container").scrollLeft(currentScrollLeft + amount);
+        }, 10);
+      }
+
+      // 스크롤 멈추는 함수
+      function stopScroll() {
+        clearInterval(scrollInterval);
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="table-container">
+    <table>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <!-- 이하 생략 -->
+      </tr>
+    </table>
+  </div>
+  <div>
+    <button id="scroll-left">&lt;</button>
+    <button id="scroll-right">&gt;</button>
+  </div>
+</body>
+</html>
+
