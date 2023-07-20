@@ -42,6 +42,11 @@ public class Member {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JsonIgnore
-  @JoinColumn(name = "MEMBER_TYPE_CD", referencedColumnName = "code", insertable = false, updatable = false)
-  private Code memberTypeCd; //맴버 유형
+  @JoinColumn(
+      name = "MEMBER_TYPE_CD",
+      referencedColumnName = "code",
+      insertable = false, updatable = false,
+      nullable = false
+  )
+  private Code memberTypeCd;
 }

@@ -25,7 +25,9 @@ public class Code {
   @Column(nullable = false)
   private String code;
 
+  @Column
   private String codeNm;
 
+  @Column
   private String explain;
 }

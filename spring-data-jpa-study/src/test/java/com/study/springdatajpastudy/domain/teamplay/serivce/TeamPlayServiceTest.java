@@ -1,5 +1,8 @@
 package com.study.springdatajpastudy.domain.teamplay.serivce;
 
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import com.study.springdatajpastudy.domain.teamplay.dto.MemberInfoDto;
 import com.study.springdatajpastudy.domain.teamplay.dto.TeamInfoDto;
 import com.study.springdatajpastudy.domain.teamplay.entity.Member;
@@ -13,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
-import org.testng.Assert;
 
 /**
  * @author : iyeong-gyo
@@ -48,8 +50,8 @@ class TeamPlayServiceTest {
   public void add_new_team_test_1() {
     List<Team> all = teamRepository.findAll();
     Team team = all.get(0);
-    Assert.assertNotNull(team);
+    assertNotNull(team);
     List<Member> members = team.getMembers();
-    Assert.assertNotEquals(members.size(), 0);
+    assertNotEquals(members.size(), 0);
   }
 }
