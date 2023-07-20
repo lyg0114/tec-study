@@ -4,7 +4,6 @@ import com.study.springdatajpastudy.domain.teamplay.dto.MemberInfoDto;
 import com.study.springdatajpastudy.domain.teamplay.dto.TeamInfoDto;
 import com.study.springdatajpastudy.domain.teamplay.entity.Member;
 import com.study.springdatajpastudy.domain.teamplay.entity.Team;
-import com.study.springdatajpastudy.domain.teamplay.repository.MemberRepository;
 import com.study.springdatajpastudy.domain.teamplay.repository.TeamRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -24,14 +23,9 @@ import org.testng.Assert;
 @SpringBootTest
 class TeamPlayServiceTest {
 
-  @Autowired
-  private MemberRepository memberRepository;
-  @Autowired
-  private TeamRepository teamRepository;
-  @Autowired
-  private TeamPlayService teamPlayService;
-  @Autowired
-  private EntityManager em;
+  @Autowired private TeamRepository teamRepository;
+  @Autowired private TeamPlayService teamPlayService;
+  @Autowired private EntityManager em;
 
   @BeforeEach
   public void before(){
@@ -58,5 +52,4 @@ class TeamPlayServiceTest {
     List<Member> members = team.getMembers();
     Assert.assertNotEquals(members.size(), 0);
   }
-
 }
