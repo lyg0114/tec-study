@@ -211,3 +211,4 @@ Temporary Items
 
 #ignore
 .gradle/
+gs-batch-processing/
