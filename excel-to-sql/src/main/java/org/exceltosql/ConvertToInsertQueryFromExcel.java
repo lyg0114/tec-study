@@ -6,10 +6,12 @@ import static org.exceltosql.utils.Param.WRITE_PATH;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Iterator;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -22,12 +24,26 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
  */
 public class ConvertToInsertQueryFromExcel {
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
+    FileInputStream consumerExcelFile
+        = new FileInputStream(READ_PATH + "excel/sample-consumerinfo.xlsx");
+    FileWriter consumerFileWriter
+        = new FileWriter(WRITE_PATH + LocalDateTime.now() + "-multi-consumerinfo.sql");
+    String consumerTable = "v_consumer_info";
+    createSQL(consumerExcelFile, consumerFileWriter, consumerTable);
+
+    FileInputStream meterDailyExcelFile
+        = new FileInputStream(READ_PATH + "excel/sample-meterdaily.xlsx");
+    FileWriter meterDailyFileWriter
+        = new FileWriter(WRITE_PATH + LocalDateTime.now() + "-multi-meterdaily.sql");
+    String meterdailyTable = "meterdaily";
+    createSQL(meterDailyExcelFile, meterDailyFileWriter, meterdailyTable);
+  }
+
+  private static void createSQL(
+      FileInputStream excelFile, FileWriter fileWriter, String tableName
+  ) {
     try {
-
-      FileInputStream excelFile = new FileInputStream(READ_PATH + "sample-data.xlsx");
-      FileWriter fileWriter = new FileWriter(WRITE_PATH + LocalDateTime.now() + "-multi-data.sql");
-
       Workbook workbook = WorkbookFactory.create(excelFile);
       Sheet sheet = workbook.getSheetAt(0);
       Iterator<Row> rowIterator = sheet.iterator();
@@ -58,7 +74,17 @@ public class ConvertToInsertQueryFromExcel {
                 .append(cell.getStringCellValue())
                 .append("'");
           } else if (cell.getCellType() == CellType.NUMERIC) {
-            values.append(cell.getNumericCellValue());
+            if (DateUtil.isCellDateFormatted(cell)) {
+              SimpleDateFormat dateFormat;
+              if (cell.getColumnIndex() == 1) {
+                dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+              } else {
+                dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+              }
+              values.append("'").append(dateFormat.format(cell.getDateCellValue())).append("'");
+            } else {
+              values.append(cell.getNumericCellValue());
+            }
           }
 
           if (cellIterator.hasNext()) {
@@ -66,7 +92,7 @@ public class ConvertToInsertQueryFromExcel {
           }
         }
 
-        String sql = "INSERT INTO your_table (" + schema + ") " + values + ");";
+        String sql = "INSERT INTO " + tableName + " (" + schema + ") " + values + ");";
         fileWriter.write(sql + "\n");
       }
 
