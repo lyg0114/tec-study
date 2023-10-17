@@ -4,6 +4,7 @@ import com.study.springdatajpastudy.repository.MeterDailyRepository;
 import com.study.springdatajpastudy.repository.MeterDailyTestRepository;
 import com.study.springdatajpastudy.repository.MeterinfoRepository;
 import com.study.springdatajpastudy.repository.MeterinfoTestRepository;
+import com.study.springdatajpastudy.repository.querydsl.TeamPlayQueryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,17 +19,15 @@ public class MoveDataService {
 
   private final MeterDailyRepository meterDailyRepository;
   private final MeterDailyTestRepository meterDailyTestRepository;
-
   private final MeterinfoRepository meterinfoRepository;
   private final MeterinfoTestRepository meterinfoTestRepository;
 
+  private final TeamPlayQueryRepository queryRepository;
 
   public void moveFromDailytoTestDaily() {
-
   }
 
   public void moveFromInfotoTestInfo() {
-
   }
 
 }
