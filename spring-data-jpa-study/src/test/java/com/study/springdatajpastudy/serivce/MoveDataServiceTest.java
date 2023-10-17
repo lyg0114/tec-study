@@ -25,22 +25,26 @@ class MoveDataServiceTest {
   @Autowired
   TeamPlayQueryRepository queryRepository;
 
-  @Test
-  public void findMeterdailyDataTest() {
-    List<String> modemIds = Arrays.asList(
+  private List<String> makeModemIds() {
+    return Arrays.asList(
         "2308WS679455",
         "2308WS679456",
         "2308WS679457",
         "2308WS679458",
         "2308WS679459"
     );
+  }
 
+  @Test
+  public void findMeterdailyDataTest() {
     DataDto build = DataDto.builder()
         .fromDate(LocalDate.parse("2023-10-14"))
         .toDate(LocalDate.parse("2023-10-16"))
         .modemIds(List.of("2308WS679457"))
         .build();
     List<Meterdaily> meterdailyData = queryRepository.findMeterdailyData(build);
+    for (Meterdaily meterdailyDatum : meterdailyData) {
+      System.out.println("meterdailyDatum = " + meterdailyDatum);
+    }
   }
-
 }
