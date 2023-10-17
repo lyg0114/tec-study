@@ -3,6 +3,7 @@ package com.study.springdatajpastudy.serivce;
 import com.study.springdatajpastudy.domain.entity.Meterdaily;
 import com.study.springdatajpastudy.domain.entity.Meterinfo;
 import com.study.springdatajpastudy.dto.DataDto;
+import com.study.springdatajpastudy.repository.MeterDailyTestRepository;
 import com.study.springdatajpastudy.repository.querydsl.TeamPlayQueryRepository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -28,6 +29,8 @@ class DataSelectTest {
   private MoveDataService service;
   @Autowired
   TeamPlayQueryRepository queryRepository;
+  @Autowired
+  MeterDailyTestRepository meterDailyTestRepository;
 
   private List<String> makeModemIds() {
     return Arrays.asList(

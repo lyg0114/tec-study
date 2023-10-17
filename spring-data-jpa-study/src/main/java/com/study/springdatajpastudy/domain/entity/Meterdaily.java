@@ -73,4 +73,8 @@ public class Meterdaily {
 
   @Column(name = "update_date")
   private LocalDate updateDate;
+
+  public MeterdailyTest converToMeterDailyTest(Long consumerSid) {
+    return null;
+  }
 }

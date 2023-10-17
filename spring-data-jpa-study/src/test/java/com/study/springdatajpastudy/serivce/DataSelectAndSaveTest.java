@@ -1,9 +1,11 @@
 package com.study.springdatajpastudy.serivce;
 
 import com.study.springdatajpastudy.domain.entity.Meterdaily;
+import com.study.springdatajpastudy.domain.entity.MeterdailyTest;
 import com.study.springdatajpastudy.domain.entity.Meterinfo;
 import com.study.springdatajpastudy.domain.entity.MeterinfoTest;
 import com.study.springdatajpastudy.dto.DataDto;
+import com.study.springdatajpastudy.repository.MeterDailyTestRepository;
 import com.study.springdatajpastudy.repository.MeterinfoTestRepository;
 import com.study.springdatajpastudy.repository.querydsl.TeamPlayQueryRepository;
 import java.time.LocalDate;
@@ -33,6 +35,8 @@ class DataSelectAndSaveTest {
   private TeamPlayQueryRepository queryRepository;
   @Autowired
   private MeterinfoTestRepository meterinfoTestRepository;
+  @Autowired
+  private MeterDailyTestRepository meterDailyTestRepository;
 
   private List<String> makeModemIds() {
     return Arrays.asList(
@@ -55,30 +59,38 @@ class DataSelectAndSaveTest {
         .build();
     List<Meterinfo> meterInfoData = queryRepository.findMeterInfoData(build);
 
-    List<MeterinfoTest> results = new ArrayList<>();
+    List<MeterinfoTest> meterInfoResults = new ArrayList<>();
     for (Meterinfo meterInfoDatum : meterInfoData) {
-      results.add(meterInfoDatum.converToMeterinfoTest(getConsumerSid(meterInfoDatum)));
+      meterInfoResults.add(meterInfoDatum.converToMeterinfoTest(
+          getConsumerSid(meterInfoDatum.getMeterinfoId().getModemId()))
+      );
     }
     meterinfoTestRepository.deleteAll();
-    meterinfoTestRepository.saveAll(results);
+    meterinfoTestRepository.saveAll(meterInfoResults);
   }
 
-  @DisplayName("오늘부터 3일간 Meterdaily 데이터 조회")
+  @DisplayName("오늘부터 3일간 MeterDaily 데이터 조회후 MeterDailyTest갱신")
   @Test
-  public void findMeterdailyThreeDaysDataTest() {
+  public void findMeterdailyThreeDaysDataAndSaveTest() {
     DataDto build = DataDto.builder()
         .fromDate(LocalDate.now().minusDays(3))
-        .toDate(LocalDate.now())
-        .modemIds(List.of("2308WS679455"))
+        .toDate(LocalDate.parse("2023-10-20"))
+        .modemIds(makeModemIds())
         .build();
-    List<Meterdaily> meterdailyData = queryRepository.findMeterdailyData(build);
-    for (Meterdaily meterdailyDatum : meterdailyData) {
-      System.out.println("meterdailyDatum = " + meterdailyDatum);
+
+    List<MeterdailyTest> meterDailyresults = new ArrayList<>();
+    List<Meterdaily> meterdailyDatas = queryRepository.findMeterdailyData(build);
+    for (Meterdaily meterdaily : meterdailyDatas) {
+      System.out.println("meterdailyDatum = " + meterdaily);
+      meterDailyresults.add(meterdaily.converToMeterDailyTest(
+          getConsumerSid(meterdaily.getMeterdailyId().getModemId())))
+      ;
     }
+    meterDailyTestRepository.deleteAll();
+    meterDailyTestRepository.saveAll(meterDailyresults);
   }
 
-  private Long getConsumerSid(Meterinfo meterInfoDatum) {
-    String modemId = meterInfoDatum.getMeterinfoId().getModemId();
+  private Long getConsumerSid(String modemId) {
     if (modemId.equals("2308WS679457")) {
       return 8L;
     }

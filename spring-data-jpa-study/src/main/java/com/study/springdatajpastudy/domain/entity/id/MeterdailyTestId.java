@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MeterdailyTestId implements Serializable {
 
-  @Column(name = "consumer_sid")
+  @Column(name = "consumer_sid", nullable = false)
   private Long consumerSid;
 
   @Column(name = "modem_id", nullable = false)
