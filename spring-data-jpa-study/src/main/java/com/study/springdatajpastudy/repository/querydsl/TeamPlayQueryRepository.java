@@ -1,9 +1,11 @@
 package com.study.springdatajpastudy.repository.querydsl;
 
 import static com.study.springdatajpastudy.domain.entity.QMeterdaily.meterdaily;
+import static com.study.springdatajpastudy.domain.entity.QMeterinfo.meterinfo;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.study.springdatajpastudy.domain.entity.Meterdaily;
+import com.study.springdatajpastudy.domain.entity.Meterinfo;
 import com.study.springdatajpastudy.dto.DataDto;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -32,7 +34,25 @@ public class TeamPlayQueryRepository {
                 dto.getToDate()
             )
         ).orderBy(
-            meterdaily.meterdailyId.dailyDate.desc())
+            meterdaily.meterdailyId.modemId.desc(),
+            meterdaily.meterdailyId.dailyDate.desc()
+        )
+        .fetch();
+  }
+
+  public List<Meterinfo> findMeterInfoData(DataDto dto) {
+    return queryFactory
+        .selectFrom(meterinfo)
+        .where(
+            meterinfo.meterinfoId.modemId.in(dto.getModemIds()),
+            meterinfo.meterinfoId.meteringDate.between(
+                dto.getFromDateTime(),
+                dto.getToDateTime()
+            )
+        ).orderBy(
+            meterinfo.meterinfoId.modemId.desc(),
+            meterinfo.meterinfoId.meteringDate.desc()
+        )
         .fetch();
   }
 }

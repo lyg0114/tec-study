@@ -1,9 +1,12 @@
 package com.study.springdatajpastudy.serivce;
 
 import com.study.springdatajpastudy.domain.entity.Meterdaily;
+import com.study.springdatajpastudy.domain.entity.Meterinfo;
 import com.study.springdatajpastudy.dto.DataDto;
 import com.study.springdatajpastudy.repository.querydsl.TeamPlayQueryRepository;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -45,6 +48,20 @@ class MoveDataServiceTest {
     List<Meterdaily> meterdailyData = queryRepository.findMeterdailyData(build);
     for (Meterdaily meterdailyDatum : meterdailyData) {
       System.out.println("meterdailyDatum = " + meterdailyDatum);
+    }
+  }
+
+  @Test
+  public void findMeterInfoDataTest() {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    DataDto build = DataDto.builder()
+        .fromDateTime(LocalDateTime.parse("2023-10-14 00:00:00", formatter))
+        .toDateTime(LocalDateTime.parse("2023-10-14 23:59:59", formatter))
+        .modemIds(List.of("2308WS679457"))
+        .build();
+    List<Meterinfo> meterInfoData = queryRepository.findMeterInfoData(build);
+    for (Meterinfo meterInfoDatum : meterInfoData) {
+      System.out.println("meterInfoDatum = " + meterInfoDatum);
     }
   }
 }

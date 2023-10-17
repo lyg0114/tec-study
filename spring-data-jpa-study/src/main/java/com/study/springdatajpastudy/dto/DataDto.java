@@ -1,6 +1,7 @@
 package com.study.springdatajpastudy.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,4 +19,6 @@ public class DataDto {
   List<String> modemIds;
   LocalDate fromDate;
   LocalDate toDate;
+  LocalDateTime fromDateTime;
+  LocalDateTime toDateTime;
 }
