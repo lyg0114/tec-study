@@ -1,4 +1,4 @@
-package com.study.springdatajpastudy.domain.repository;
+package com.study.springdatajpastudy.repository;
 
 import com.study.springdatajpastudy.domain.entity.Meterinfo;
 import com.study.springdatajpastudy.domain.entity.id.MeterinfoId;
