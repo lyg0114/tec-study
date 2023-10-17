@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,6 +37,34 @@ class MoveDataServiceTest {
         "2308WS679458",
         "2308WS679459"
     );
+  }
+
+  @DisplayName("오늘부터 3일간 Meterdaily 데이터 조회")
+  @Test
+  public void findMeterdailyThreeDaysDataTest() {
+    DataDto build = DataDto.builder()
+        .fromDate(LocalDate.now().minusDays(3))
+        .toDate(LocalDate.now())
+        .modemIds(List.of("2308WS679457"))
+        .build();
+    List<Meterdaily> meterdailyData = queryRepository.findMeterdailyData(build);
+    for (Meterdaily meterdailyDatum : meterdailyData) {
+      System.out.println("meterdailyDatum = " + meterdailyDatum);
+    }
+  }
+
+  @DisplayName("오늘부터 3일간 Meterinfo 데이터 조회")
+  @Test
+  public void findMeterinfoThreeDaysDataTest() {
+    DataDto build = DataDto.builder()
+        .fromDateTime(LocalDateTime.now().minusDays(3))
+        .toDateTime(LocalDateTime.now())
+        .modemIds(List.of("2308WS679455"))
+        .build();
+    List<Meterinfo> meterInfoData = queryRepository.findMeterInfoData(build);
+    for (Meterinfo meterInfoDatum : meterInfoData) {
+      System.out.println("meterInfoDatum = " + meterInfoDatum);
+    }
   }
 
   @Test
