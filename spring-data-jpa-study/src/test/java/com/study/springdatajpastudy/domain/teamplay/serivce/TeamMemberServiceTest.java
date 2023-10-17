@@ -5,11 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.study.springdatajpastudy.domain.teamplay.dto.MemberInfoDto;
 import com.study.springdatajpastudy.domain.teamplay.dto.TeamInfoDto;
-import com.study.springdatajpastudy.domain.teamplay.entity.Member;
-import com.study.springdatajpastudy.domain.teamplay.entity.Team;
-import com.study.springdatajpastudy.domain.teamplay.repository.CodeRepository;
-import com.study.springdatajpastudy.domain.teamplay.repository.MemberRepository;
-import com.study.springdatajpastudy.domain.teamplay.repository.TeamRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;

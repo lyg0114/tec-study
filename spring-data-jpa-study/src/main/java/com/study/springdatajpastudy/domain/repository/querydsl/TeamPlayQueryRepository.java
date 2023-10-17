@@ -1,4 +1,4 @@
-package com.study.springdatajpastudy.domain.teamplay.repository.querydsl;
+package com.study.springdatajpastudy.domain.repository.querydsl;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
