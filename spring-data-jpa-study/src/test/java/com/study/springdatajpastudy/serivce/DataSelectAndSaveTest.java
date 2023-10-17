@@ -2,11 +2,12 @@ package com.study.springdatajpastudy.serivce;
 
 import com.study.springdatajpastudy.domain.entity.Meterdaily;
 import com.study.springdatajpastudy.domain.entity.Meterinfo;
+import com.study.springdatajpastudy.domain.entity.MeterinfoTest;
 import com.study.springdatajpastudy.dto.DataDto;
 import com.study.springdatajpastudy.repository.querydsl.TeamPlayQueryRepository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -22,7 +23,7 @@ import org.springframework.test.context.ActiveProfiles;
  */
 @ActiveProfiles("refec")
 @SpringBootTest
-class MoveDataServiceTest {
+class DataSelectAndSaveTest {
 
   @Autowired
   private MoveDataService service;
@@ -45,7 +46,7 @@ class MoveDataServiceTest {
     DataDto build = DataDto.builder()
         .fromDate(LocalDate.now().minusDays(3))
         .toDate(LocalDate.now())
-        .modemIds(List.of("2308WS679457"))
+        .modemIds(List.of("2308WS679455"))
         .build();
     List<Meterdaily> meterdailyData = queryRepository.findMeterdailyData(build);
     for (Meterdaily meterdailyDatum : meterdailyData) {
@@ -62,35 +63,11 @@ class MoveDataServiceTest {
         .modemIds(List.of("2308WS679455"))
         .build();
     List<Meterinfo> meterInfoData = queryRepository.findMeterInfoData(build);
+
+    List<MeterinfoTest> results = new ArrayList<>();
     for (Meterinfo meterInfoDatum : meterInfoData) {
       System.out.println("meterInfoDatum = " + meterInfoDatum);
-    }
-  }
-
-  @Test
-  public void findMeterdailyDataTest() {
-    DataDto build = DataDto.builder()
-        .fromDate(LocalDate.parse("2023-10-14"))
-        .toDate(LocalDate.parse("2023-10-16"))
-        .modemIds(List.of("2308WS679457"))
-        .build();
-    List<Meterdaily> meterdailyData = queryRepository.findMeterdailyData(build);
-    for (Meterdaily meterdailyDatum : meterdailyData) {
-      System.out.println("meterdailyDatum = " + meterdailyDatum);
-    }
-  }
-
-  @Test
-  public void findMeterInfoDataTest() {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    DataDto build = DataDto.builder()
-        .fromDateTime(LocalDateTime.parse("2023-10-14 00:00:00", formatter))
-        .toDateTime(LocalDateTime.parse("2023-10-14 23:59:59", formatter))
-        .modemIds(List.of("2308WS679457"))
-        .build();
-    List<Meterinfo> meterInfoData = queryRepository.findMeterInfoData(build);
-    for (Meterinfo meterInfoDatum : meterInfoData) {
-      System.out.println("meterInfoDatum = " + meterInfoDatum);
+      results.add(meterInfoDatum.converToMeterinfoTest(11L));
     }
   }
 }

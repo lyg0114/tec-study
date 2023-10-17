@@ -1,6 +1,7 @@
 package com.study.springdatajpastudy.domain.entity;
 
 import com.study.springdatajpastudy.domain.entity.id.MeterinfoId;
+import com.study.springdatajpastudy.domain.entity.id.MeterinfoTestId;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -81,4 +82,31 @@ public class Meterinfo {
   @Column(name = "update_date")
   private LocalDate updateDate;
 
+  public MeterinfoTest converToMeterinfoTest(Long consumerSid) {
+    MeterinfoTest.MeterinfoTestBuilder builder = MeterinfoTest.builder();
+    MeterinfoId meterinfoId = this.getMeterinfoId();
+    builder.meterinfoTestId(new MeterinfoTestId(
+        consumerSid, meterinfoId.getModemId(), meterinfoId.getMeteringDate()
+    ));
+    builder.receivingDate(this.receivingDate);
+    builder.meteringValue(this.meteringValue);
+    builder.meteringUsage(this.meteringUsage);
+    builder.meteringTemp(this.meteringTemp);
+    builder.meteringState(this.meteringState);
+    builder.meteringSignal01(this.meteringSignal01);
+    builder.meteringSignal02(this.meteringSignal02);
+    builder.meteringSignal03(this.meteringSignal03);
+    builder.meteringSignal04(this.meteringSignal04);
+    builder.modem_rssi(this.modem_rssi);
+    builder.modemSignal01(this.modemSignal01);
+    builder.modemSignal02(this.modemSignal02);
+    builder.modemSignal03(this.modemSignal03);
+    builder.infoTag(this.infoTag);
+    builder.infoTagDetail(this.infoTagDetail);
+    builder.acubeSignal01(this.acubeSignal01);
+    builder.acubeSignal02(this.acubeSignal02);
+    builder.insertDate(this.insertDate);
+    builder.updateDate(this.updateDate);
+    return builder.build();
+  }
 }
