@@ -1,0 +1,24 @@
+# H2 데이터베이스를 사용하는 경우
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://211.251.239.174:3306/kspia_mtd_op?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: root
+    password: kspia01!@#
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+      use-new-id-generator-mappings: false
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+  hibernate:
+    format-sql: false
+    dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    default-batch-fetch-size: 500
