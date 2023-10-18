@@ -1,6 +1,7 @@
 package com.study.springdatajpastudy.domain.entity;
 
 import com.study.springdatajpastudy.domain.entity.id.MeterdailyId;
+import com.study.springdatajpastudy.domain.entity.id.MeterdailyTestId;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -75,6 +76,26 @@ public class Meterdaily {
   private LocalDate updateDate;
 
   public MeterdailyTest converToMeterDailyTest(Long consumerSid) {
-    return null;
+    MeterdailyTest.MeterdailyTestBuilder meterdailyTestBuilder = MeterdailyTest.builder();
+    meterdailyTestBuilder.meterdailyTestId(new MeterdailyTestId(
+        consumerSid, this.meterdailyId.getModemId(), this.meterdailyId.getDailyDate())
+    );
+    meterdailyTestBuilder.meteringDate(this.meteringDate);
+    meterdailyTestBuilder.dailyPastValue(this.dailyPastValue);
+    meterdailyTestBuilder.dailyLastValue(this.dailyLastValue);
+    meterdailyTestBuilder.dailyUsage(this.dailyUsage);
+    meterdailyTestBuilder.meterBackflow(this.meterBackflow);
+    meterdailyTestBuilder.meterBattery(this.meterBattery);
+    meterdailyTestBuilder.meterOverflow(this.meterOverflow);
+    meterdailyTestBuilder.meterWaterleak(this.meterWaterleak);
+    meterdailyTestBuilder.meteringTemp(this.meteringTemp);
+    meterdailyTestBuilder.modemRssi(this.modemRssi);
+    meterdailyTestBuilder.modemConnect(this.modemConnect);
+    meterdailyTestBuilder.modemBattery(this.modemBattery);
+    meterdailyTestBuilder.timeSync(this.timeSync);
+    meterdailyTestBuilder.dailyTag(this.dailyTag);
+    meterdailyTestBuilder.insertDate(this.insertDate);
+    meterdailyTestBuilder.updateDate(this.updateDate);
+    return meterdailyTestBuilder.build();
   }
 }
