@@ -38,6 +38,9 @@ class DataSelectAndSaveTest {
   @Autowired
   private MeterDailyTestRepository meterDailyTestRepository;
 
+  private String toDateStr = "2023-10-20";
+  private String toDateTimeStr = toDateStr + " 23:59:59";
+
   private List<String> makeModemIds() {
     return Arrays.asList(
         "2308WS679455",
@@ -54,7 +57,7 @@ class DataSelectAndSaveTest {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     DataDto build = DataDto.builder()
         .fromDateTime(LocalDateTime.now().minusDays(3))
-        .toDateTime(LocalDateTime.parse("2023-10-20 23:59:59", formatter))
+        .toDateTime(LocalDateTime.parse(toDateTimeStr, formatter))
         .modemIds(makeModemIds())
         .build();
     List<Meterinfo> meterInfoData = queryRepository.findMeterInfoData(build);
@@ -74,7 +77,7 @@ class DataSelectAndSaveTest {
   public void findMeterdailyThreeDaysDataAndSaveTest() {
     DataDto build = DataDto.builder()
         .fromDate(LocalDate.now().minusDays(3))
-        .toDate(LocalDate.parse("2023-10-20"))
+        .toDate(LocalDate.parse(toDateStr))
         .modemIds(makeModemIds())
         .build();
 
